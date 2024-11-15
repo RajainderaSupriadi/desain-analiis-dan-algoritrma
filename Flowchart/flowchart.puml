@@ -1,0 +1,46 @@
+@startuml dataguru_flowchart
+title Flowchart untuk Aplikasi Manajemen Data Guru
+
+start
+
+:Buka Aplikasi;
+
+:Login ke Aplikasi;
+
+:Cek Kredensial;
+
+if (Kredensial Valid?) then (Ya)
+    if (Admin?) then (Ya)
+        :Login Sebagai Admin;
+        :Akses Manajemen Data Guru;
+        :Pilih Aksi;
+        if (Aksi = Menambahkan Guru) then (Tambah Guru)
+            :Masukkan Detail Data Guru (Nama, NIP, Mata Pelajaran, dsb);
+            :Simpan Data Guru ke Database;
+            :Selesai;
+        elseif (Aksi = Edit Guru) then (Edit Guru)
+            :Pilih Guru yang Akan Diedit;
+            :Perbarui Detail Data Guru;
+            :Simpan Perubahan ke Database;
+            :Selesai;
+        elseif (Aksi = Hapus Guru) then (Hapus Guru)
+            :Pilih Guru yang Akan Dihapus;
+            :Konfirmasi Penghapusan;
+            :Hapus Data Guru dari Database;
+            :Selesai;
+        endif
+        :Logout;
+    else (Mahasiswa)
+        :Login Sebagai Mahasiswa;
+        :Akses Tampilan Daftar Guru;
+        :Tampilkan Daftar Guru (Nama, Mata Pelajaran, Status);
+        :Logout;
+    endif
+else (Tidak)
+    :Tampilkan "Kredensial Tidak Valid";
+    :Kembali ke Halaman Login;
+endif
+
+stop
+
+@enduml
